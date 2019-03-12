@@ -4,6 +4,9 @@
         <h2 class="race-title">{{raceTitle}}</h2>
         <h2 class="circuit-name">{{circuitName}}</h2>
         <h2 class="until-start">{{timeToRace}}</h2>
+        <div class="flag">
+          <img v-bind:src="flagSource" />
+        </div>
     </div>
 </template>
 
@@ -16,7 +19,8 @@ export default {
           raceData: '',
           raceTitle: '',
           circuitName: '',
-          timeToRace: ''
+          timeToRace: '',
+          flagSource: ''
       }
   },
   created: function() {
@@ -37,6 +41,8 @@ export default {
           this.circuitName = data.Circuit.circuitName;
           var dateTime = data.date + " " + data.time;
           this.timeToRace = this.moment(dateTime, "YYYY-MM-DD hh:mm:ss").fromNow();
+          this.flagSource = require('../assets/flags/' + data.Circuit.Location.country + '.svg');
+          //this.flagSource = './assets/logo.png';
       }
   }
 }
@@ -57,5 +63,10 @@ li {
 }
 a {
   color: #42b983;
+}
+
+.flag {
+  width: 50%;
+  margin: 0 auto;
 }
 </style>
