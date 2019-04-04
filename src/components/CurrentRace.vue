@@ -28,7 +28,7 @@ export default {
   },
   methods: {
       getRaceData() {
-          this.$http.get('http://3.8.255.185/api/v1/Race/GetCurrentRace').then(response => {
+          this.$http.get('http://localhost:52315/api/v1/Race/GetCurrentRace').then(response => {
             this.raceData = response.body.MRData;
             this.assignRaceData(response.body.MRData.RaceTable.Races[0]);
             console.log(this.raceData);

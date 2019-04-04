@@ -53,6 +53,8 @@ namespace F1Server.Controllers
                     break;
                 case "DriverStandings": requestUrl = "http://ergast.com/api/f1/current/driverStandings.json";
                     break;
+                case "ConstructorStandings": requestUrl = "http://ergast.com/api/f1/current/constructorStandings.json";
+                    break;
                 default:
                     break;
             }
@@ -74,6 +76,8 @@ namespace F1Server.Controllers
                     case "CurrentRace": tmpRes = JsonConvert.DeserializeObject<RaceData.RaceData>(response.Content.ReadAsStringAsync().Result);
                         break;
                     case "DriverStandings": tmpRes = JsonConvert.DeserializeObject<DriverStandings.DriverStandings>(response.Content.ReadAsStringAsync().Result);
+                        break;
+                    case "ConstructorStandings": tmpRes = JsonConvert.DeserializeObject<ConstructorStandings.ConstructorStandings>(response.Content.ReadAsStringAsync().Result);
                         break;
                     default:
                         tmpRes = null;

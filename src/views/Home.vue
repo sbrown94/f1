@@ -1,12 +1,13 @@
 <template>
   <div class="home">
     <CurrentRace />
-    <DriverStandings v-if="displaying=='driver-standings'"/>
         <div class="options">
           <div v-on:click="switchTo('driver-standings')" class="option">Driver Standings</div>
           <div v-on:click="switchTo('constructor-standings')" class="option">Constructor Standings</div>
           <div v-on:click="switchTo('')" class="option">Driver Search</div>
         </div>
+      <DriverStandings v-if="displaying=='driver-standings'"/>
+      <ConstructorStandings v-if="displaying=='constructor-standings'" />
   </div>
 </template>
 
@@ -14,12 +15,14 @@
 // @ is an alias to /src
 import CurrentRace from '@/components/CurrentRace.vue'
 import DriverStandings from '@/components/DriverStandings.vue'
+import ConstructorStandings from '@/components/ConstructorStandings.vue'
 
 export default {
   name: 'home',
   components: {
     CurrentRace,
-    DriverStandings
+    DriverStandings,
+    ConstructorStandings
   },
   data: function() {
       return {

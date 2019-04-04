@@ -1,14 +1,8 @@
 <template>
     <div class="current-race">
-        <h1 class="title">CHAMPIONSHIP STANDINGS</h1>
-        <!-- <h2 class="race-title">{{raceTitle}}</h2>
-        <h2 class="circuit-name">{{circuitName}}</h2>
-        <h2 class="until-start">{{timeToRace}}</h2>
-        <div class="flag">
-          <img v-bind:src="flagSource" />
-        </div> -->
+        <h1 class="title">CONSTRUCTOR STANDINGS</h1>
         <div v-for="standing in standings">
-            <h2>{{standing.Driver.code}} - {{standing.points}}</h2>
+            <h2>{{standing.Constructor.name}} - {{standing.points}}</h2>
         </div>
     </div>
 </template>
@@ -16,7 +10,7 @@
 <script>
 
 export default {
-  name: 'DriverStandings',
+  name: 'ConstructorStandings',
   data: function() {
       return {
           standings: ''
@@ -27,8 +21,8 @@ export default {
   },
   methods: {
       getRaceData() {
-          this.$http.get('http://localhost:52315/api/v1/Race/GetDriverStandings').then(response => {
-            this.assignStandingsData(response.body.MRData.StandingsTable.StandingsLists[0].DriverStandings);
+          this.$http.get('http://localhost:52315/api/v1/Race/GetConstructorStandings').then(response => {
+            this.assignStandingsData(response.body.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
           }, error => {
               // error
           });
