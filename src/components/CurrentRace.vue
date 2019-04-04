@@ -1,11 +1,10 @@
 <template>
-    <div class="current-race">
-        <h1 class="title">NEXT RACE</h1>
-        <h2 class="race-title">{{raceTitle}}</h2>
-        <h2 class="circuit-name">{{circuitName}}</h2>
-        <h2 class="until-start">{{timeToRace}}</h2>
-        <div class="flag">
-          <img v-bind:src="flagSource" />
+    <div v-bind:style="{ backgroundImage: 'url(' + flagSource + ')' }" class="current-race flag">
+        <div class="flag-content">
+            <h1 class="title">NEXT RACE</h1>
+            <h2 class="race-title">{{raceTitle}}</h2>
+            <h2 class="circuit-name">{{circuitName}}</h2>
+            <h2 class="until-start">{{timeToRace}}</h2>
         </div>
     </div>
 </template>
@@ -66,7 +65,17 @@ a {
 }
 
 .flag {
-  width: 50%;
-  margin: 0 auto;
+  //background-repeat: no-repeat;
+  height: 600px;
+  width: 100%;
+}
+
+.flag-content {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%); 
+    color: black;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
 }
 </style>
