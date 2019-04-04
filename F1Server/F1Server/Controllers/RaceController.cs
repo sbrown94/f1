@@ -42,6 +42,9 @@ namespace F1Server.Controllers
                 case "CurrentRace": requestUrl = "https://ergast.com/api/f1/current/next.json";
                     break;
                 case "DriverStandings": requestUrl = "http://ergast.com/api/f1/current/driverStandings";
+                    break;
+                default:
+                    break;
             }
 
             using (var client = new HttpClient())
