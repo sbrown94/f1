@@ -19,13 +19,30 @@ namespace F1Server.Controllers
 
         public IHttpActionResult GetCurrentRace()
         {
-            string cacheKey = "CurrentRace";
-            if(_cache.Contains(cacheKey)) {
+            return GetData("CurrentRace");
+        }
+
+        public IHttpActionResult GetDriverStandings()
+        {
+            return GetData("DriverStandings");
+        }
+
+        public IHttpActionResult GetData(string key)
+        {
+            string cacheKey = key;
+            if (_cache.Contains(cacheKey))
+            {
                 return Ok(_cache.Get(cacheKey));
             }
 
+            string requestUrl = "null";
 
-            string requestUrl = "https://ergast.com/api/f1/current/next.json";
+            switch(key)
+            {
+                case "CurrentRace": requestUrl = "https://ergast.com/api/f1/current/next.json";
+                    break;
+                case "DriverStandings": requestUrl = "http://ergast.com/api/f1/current/driverStandings";
+            }
 
             using (var client = new HttpClient())
             {
