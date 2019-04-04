@@ -31,6 +31,12 @@ namespace F1Server.Controllers
             return GetData("DriverStandings");
         }
 
+        [Route("api/v1/Race/GetConstructorStandings")]
+        public IHttpActionResult GetConstructorStandings()
+        {
+            return GetData("ConstructorStandings");
+        }
+
         public IHttpActionResult GetData(string key)
         {
             string cacheKey = key;
