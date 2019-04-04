@@ -8,8 +8,10 @@ using System.Web.Http;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Web.Http.Routing;
 using System.Net;
 using Newtonsoft.Json;
+using RouteAttribute = System.Web.Http.RouteAttribute;
 
 namespace F1Server.Controllers
 {
@@ -17,11 +19,13 @@ namespace F1Server.Controllers
     {
         private readonly MemoryCache _cache = MemoryCache.Default;
 
+        [Route("api/v1/Race/GetCurrentRace")]
         public IHttpActionResult GetCurrentRace()
         {
             return GetData("CurrentRace");
         }
 
+        [Route("api/v1/Race/GetDriverStandings")]
         public IHttpActionResult GetDriverStandings()
         {
             return GetData("DriverStandings");
@@ -41,7 +45,7 @@ namespace F1Server.Controllers
             {
                 case "CurrentRace": requestUrl = "https://ergast.com/api/f1/current/next.json";
                     break;
-                case "DriverStandings": requestUrl = "http://ergast.com/api/f1/current/driverStandings";
+                case "DriverStandings": requestUrl = "http://ergast.com/api/f1/current/driverStandings.json";
                     break;
                 default:
                     break;
@@ -56,7 +60,21 @@ namespace F1Server.Controllers
                 {
                     throw new ApplicationException("Request failed. Server replied: " + response.Content.ReadAsStringAsync().Result);
                 }
-                var result = JsonConvert.DeserializeObject<RaceData>(response.Content.ReadAsStringAsync().Result);
+
+                object tmpRes = null;
+
+                switch (key)
+                {
+                    case "CurrentRace": tmpRes = JsonConvert.DeserializeObject<RaceData.RaceData>(response.Content.ReadAsStringAsync().Result);
+                        break;
+                    case "DriverStandings": tmpRes = JsonConvert.DeserializeObject<DriverStandings.DriverStandings>(response.Content.ReadAsStringAsync().Result);
+                        break;
+                    default:
+                        tmpRes = null;
+                        break;
+                }
+
+                var result = tmpRes;
                 _cache.Add(cacheKey, result, DateTime.Now.AddMinutes(120));
                 return Ok(result);
             }
