@@ -59,7 +59,7 @@ export default {
     padding: 20px;
     border-top: 5px solid black;
     color: white;
-    text-shadow: 2px 2px black;
+    text-shadow: 2px 2px 10px black;
     font-size: 24px;
 }
 
