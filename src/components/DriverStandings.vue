@@ -7,8 +7,10 @@
         <div class="flag">
           <img v-bind:src="flagSource" />
         </div> -->
-        <div class="driver-standings" v-for="standing in standings">
-            <h2 class="driver-standing"><span>{{standing.Driver.code}}</span><span>{{standing.points}}</span></h2>
+        <div class="driver-standings" v-for="standing in standings" v-bind:style="{ backgroundColor: getTeamColor(standing.Constructors[0].name) }">
+            <h2 class="driver-standing">
+                <span>{{standing.Driver.code}}</span><span>{{standing.points}}</span>
+            </h2>
         </div>
     </div>
 </template>
@@ -35,6 +37,9 @@ export default {
       },
       assignStandingsData(data) {
           this.standings = data;
+      },
+      getTeamColor(team) {
+          return this.teamColors[team];
       }
   }
 }
@@ -43,23 +48,19 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-.driver-standings:nth-child(odd) {
-    background-color: pink;
-}
-
-.driver-standings:nth-child(even) {
-    background-color: lightcoral;
-}
-
 .driver-standing {
     display: flex;
     justify-content: space-between;
     max-width: 250px;
     margin: 0 auto;
-    border-bottom: 1px solid black;
 }
 
 .driver-standings {
     padding: 20px;
+    border-top: 5px solid black;
+    color: white;
+    text-shadow: 2px 2px black;
+    font-size: 24px;
 }
+
 </style>

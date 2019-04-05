@@ -68,7 +68,7 @@ a {
 .flag {
   background-position: center;
   background-size: cover;
-  height: 600px;
+  height: 450px;
   width: 100%;
 }
 
