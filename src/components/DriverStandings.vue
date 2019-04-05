@@ -63,4 +63,8 @@ export default {
     font-size: 24px;
 }
 
+.driver-standings:last-child {
+  border-bottom: 5px solid black;
+}
+
 </style>
