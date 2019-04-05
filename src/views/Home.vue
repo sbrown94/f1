@@ -37,3 +37,24 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.options {
+  display: flex;
+  justify-content: space-between;
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+.option {
+  background-color: pink;
+  cursor: pointer;
+  padding: 50px;
+}
+
+.option:hover {
+  background-color: red;
+  color: white;
+}
+</style>

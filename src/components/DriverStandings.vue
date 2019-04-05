@@ -7,8 +7,8 @@
         <div class="flag">
           <img v-bind:src="flagSource" />
         </div> -->
-        <div v-for="standing in standings">
-            <h2>{{standing.Driver.code}} - {{standing.points}}</h2>
+        <div class="driver-standings" v-for="standing in standings">
+            <h2 class="driver-standing"><span>{{standing.Driver.code}}</span><span>{{standing.points}}</span></h2>
         </div>
     </div>
 </template>
@@ -42,23 +42,24 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+
+.driver-standings:nth-child(odd) {
+    background-color: pink;
 }
 
-.flag {
-  width: 50%;
-  margin: 0 auto;
+.driver-standings:nth-child(even) {
+    background-color: lightcoral;
+}
+
+.driver-standing {
+    display: flex;
+    justify-content: space-between;
+    max-width: 250px;
+    margin: 0 auto;
+    border-bottom: 1px solid black;
+}
+
+.driver-standings {
+    padding: 20px;
 }
 </style>

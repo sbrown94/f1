@@ -18,5 +18,6 @@
 }
 body {
   margin: 0 auto;
+  min-height: 2000px;
 }
 </style>
