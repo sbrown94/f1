@@ -21,7 +21,7 @@ export default {
   },
   methods: {
       getRaceData() {
-          this.$http.get('http://localhost:52315/api/v1/Race/GetConstructorStandings').then(response => {
+          this.$http.get('http://3.8.255.185/api/v1/Race/GetConstructorStandings').then(response => {
             this.assignStandingsData(response.body.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
           }, error => {
               // error

@@ -1,5 +1,5 @@
 <template>
-    <div v-bind:style="{ backgroundImage: 'url(' + flagSource + ')' }" class="current-race flag">
+    <div v-bind:style="{ backgroundImage: 'url(' + bgSource + ')' }" class="current-race flag">
         <div class="flag-content">
             <h1 class="title">NEXT RACE</h1>
             <h2 class="race-title">{{raceTitle}}</h2>
@@ -27,7 +27,7 @@ export default {
   },
   methods: {
       getRaceData() {
-          this.$http.get('http://localhost:52315/api/v1/Race/GetCurrentRace').then(response => {
+          this.$http.get('http://3.8.255.185/api/v1/Race/GetCurrentRace').then(response => {
             this.raceData = response.body.MRData;
             this.assignRaceData(response.body.MRData.RaceTable.Races[0]);
             console.log(this.raceData);
@@ -41,6 +41,7 @@ export default {
           var dateTime = data.date + " " + data.time;
           this.timeToRace = this.moment(dateTime, "YYYY-MM-DD hh:mm:ss").fromNow();
           this.flagSource = require('../assets/flags/' + data.Circuit.Location.country + '.svg');
+          this.bgSource = require('../assets/backgrounds/' + data.Circuit.Location.country + '.jpg');
           //this.flagSource = './assets/logo.png';
       }
   }
@@ -65,7 +66,8 @@ a {
 }
 
 .flag {
-  //background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   height: 600px;
   width: 100%;
 }
